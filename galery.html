@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namangan Gullar Festivali | Galereya</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background: #000 url('fvl4.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        header {
+            position: absolute; top: 0; width: 100%; padding: 15px 0; z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 0 10px; }
+        
+        .nav-btn {
+            background: rgba(255, 215, 0, 0.1);
+            color: #fff; border: 2px solid #ffd700;
+            padding: 8px 15px; border-radius: 30px;
+            cursor: pointer; transition: 0.3s; font-weight: bold;
+            text-transform: uppercase;
+            font-size: clamp(10px, 2.5vw, 13px);
+        }
+
+        .nav-btn:hover { background: #ffd700; color: #000; box-shadow: 0 0 15px #ffd700; }
+
+        /* Карусел контейнери */
+        .gallery-container {
+            position: relative;
+            perspective: 1500px; /* Мобилда чуқурликни оширдик */
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .carousel {
+            position: relative;
+            width: clamp(150px, 40vw, 250px);
+            height: clamp(150px, 40vw, 250px);
+            transform-style: preserve-3d;
+            animation: rotate-carousel 25s infinite linear;
+        }
+
+        @keyframes rotate-carousel {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            padding: 4px;
+            background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 400% 400%;
+            animation: rainbow-border 3s linear infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            backface-visibility: hidden; /* Орқа томондан кўринмаслиги учун */
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Элементларни айлана бўйлаб жойлаштириш (Мослашувчан радиус) */
+        /* translateZ қиймати экран ўлчамига қараб ўзгаради */
+        .item1 { transform: rotateY(0deg) translateZ(clamp(200px, 50vw, 400px)); }
+        .item2 { transform: rotateY(51.4deg) translateZ(clamp(200px, 50vw, 400px)); }
+        .item3 { transform: rotateY(102.8deg) translateZ(clamp(200px, 50vw, 400px)); }
+        .item4 { transform: rotateY(154.2deg) translateZ(clamp(200px, 50vw, 400px)); }
+        .item5 { transform: rotateY(205.6deg) translateZ(clamp(200px, 50vw, 400px)); }
+        .item6 { transform: rotateY(257deg) translateZ(clamp(200px, 50vw, 400px)); }
+        .item7 { transform: rotateY(308.4deg) translateZ(clamp(200px, 50vw, 400px)); }
+
+        .bottom-ribbon {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            background: rgba(255, 215, 0, 0.8);
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ribbon-text {
+            display: inline-block;
+            font-weight: bold;
+            font-size: clamp(14px, 4vw, 18px);
+            color: #000;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+
+        @keyframes rainbow-border {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .click-particle {
+            position: fixed; pointer-events: none; border-radius: 50%;
+            z-index: 9999; animation: explode 0.8s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+        }
+
+        /* Мобил қурилмалар учун қўшимча тузатишлар */
+        @media (max-width: 600px) {
+            .carousel { margin-top: -50px; } /* Менюдан бироз пастроққа */
+            header { padding: 10px 0; }
+        }
+    </style>
+</head>
+<body onclick="createBurst(event)">
+
+    <div class="overlay"></div>
+
+    <header>
+        <nav>
+            <button class="nav-btn" onclick="location.href='index.html'">Asosiy</button>
+            <button class="nav-btn" onclick="location.href='#'" style="background: #ffd700; color: #000;">Galereya</button>
+            <button class="nav-btn" onclick="location.href='history.html'">Tarix</button>
+            <button class="nav-btn" onclick="location.href='video.html'">Video</button>
+            <button class="nav-btn" onclick="location.href='#'">Bog'lanish</button>
+        </nav>
+    </header>
+
+    <div class="gallery-container">
+        <div class="carousel">
+            <div class="carousel-item item1"><img src="01.jpg" alt="1"></div>
+            <div class="carousel-item item2"><img src="02.png" alt="2"></div>
+            <div class="carousel-item item3"><img src="03.png" alt="3"></div>
+            <div class="carousel-item item4"><img src="04.png" alt="4"></div>
+            <div class="carousel-item item5"><img src="05.jpg" alt="5"></div>
+            <div class="carousel-item item6"><img src="06.jpg" alt="6"></div>
+            <div class="carousel-item item7"><img src="07.jpg" alt="7"></div>
+        </div>
+    </div>
+
+    <div class="bottom-ribbon">
+        <div class="ribbon-text">
+            🌸 Namangan 65-xalqaro gullar festivalidan lavhalar... 🌹 Go'zallik bayrami davom etmoqda! 🌷 Namangan gullari - dunyo nigohida! 🌻
+        </div>
+    </div>
+
+    <script>
+        const rainbowColors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
+
+        function createBurst(e) {
+            const count = window.innerWidth < 600 ? 10 : 20; // Мобилда камроқ нуқта
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.className = 'click-particle';
+                const color = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+                p.style.background = color;
+                p.style.width = Math.random() * 6 + 3 + 'px';
+                p.style.height = p.style.width;
+                p.style.left = e.clientX + 'px';
+                p.style.top = e.clientY + 'px';
+                const dx = (Math.random() - 0.5) * 200 + 'px';
+                const dy = (Math.random() - 0.5) * 200 + 'px';
+                p.style.setProperty('--dx', dx);
+                p.style.setProperty('--dy', dy);
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 800);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namangan Gullar Festivali | Tarix</title>
+    <style>
+        :root {
+            --neon-green: #39ff14;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            background: #0b0f19 url('image_74b4a6.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            scroll-behavior: smooth;
+        }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 1;
+        }
+
+        header {
+            position: sticky; top: 0; width: 100%; padding: 15px 0; z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(57, 255, 20, 0.3);
+        }
+
+        nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        
+        .nav-main-btn {
+            background: transparent; color: #fff; border: 1px solid #ffd700;
+            padding: 8px 15px; border-radius: 5px; cursor: pointer;
+            text-transform: uppercase; font-size: 12px; transition: 0.3s;
+        }
+
+        .nav-main-btn:hover { background: #ffd700; color: #000; }
+
+        /* Асосий Контент Контейнери */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: 1fr 300px; /* Чапда матн, ўнгда мундарижа */
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            height: calc(100vh - 150px);
+        }
+
+        /* Чап томон - Блог матни */
+        .blog-post {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .blog-post h1 { color: #ffd700; border-bottom: 2px solid var(--neon-green); padding-bottom: 10px; }
+        .blog-post p { line-height: 1.8; font-size: 17px; color: #e0e0e0; }
+
+        /* Ўнг томон - Мундарижа */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sidebar h3 { color: var(--neon-green); text-align: center; margin-bottom: 10px; }
+
+        .side-btn {
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.4s;
+            text-align: left;
+            /* Яшил товланиш эффекти */
+            box-shadow: 0 0 5px var(--neon-green);
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 5px var(--neon-green); }
+            50% { box-shadow: 0 0 20px var(--neon-green); }
+            100% { box-shadow: 0 0 5px var(--neon-green); }
+        }
+
+        .side-btn:hover {
+            background: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 30px var(--neon-green);
+            transform: translateX(5px);
+        }
+
+        /* Босилгандаги нуқталар */
+        .click-particle {
+            position: fixed; pointer-events: none; border-radius: 50%;
+            z-index: 9999; animation: explode 0.8s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+        }
+
+        /* Мобил адаптация */
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr; /* Устунларни битта қилиш */
+                height: auto;
+            }
+            .sidebar { order: -1; } /* Мундарижа тепага чиқади */
+            .blog-post { height: auto; margin-bottom: 50px; }
+        }
+    </style>
+</head>
+<body onclick="createBurst(event)">
+
+    <div class="overlay"></div>
+
+    <header>
+        <nav>
+            <button class="nav-main-btn" onclick="location.href='index.html'">Asosiy</button>
+            <button class="nav-main-btn" onclick="location.href='galery.html'">Galereya</button>
+            <button class="nav-main-btn" style="background: var(--neon-green); color: #000; border-color: var(--neon-green);">Tarix</button>
+            <button class="nav-main-btn" onlink="location.href='video.html'">Video</button>
+            <button class="nav-main-btn">Bog'lanish</button>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <article class="blog-post" id="content-area">
+            <h1>Namangan Gullar Festivali Tarixi</h1>
+            <p>Наманган гуллар фестивали илк бор 1961 йилда ўтказилган бўлиб, бугунги кунда у нафақат Ўзбекистон, балки бутун дунёга машҳур маданий тадбирга айланди.</p>
+            <p>Дастлаб маҳаллий гулчиларнинг кичик кўргазмаси сифатида бошланган бу байрам, йиллар ўтиб халқаро мақомга эга бўлди. Ҳар йили май ойининг охирида Наманган шаҳри ҳақиқий гуллар шаҳрига айланади.</p>
+            <p>Ўнг томондаги мундарижа орқали фестивалнинг турли йиллардаги ривожланиши ва қизиқарли маълумотлар билан танишишингиз мумкин.</p>
+        </article>
+
+        <aside class="sidebar">
+            <h3>MUNDARIJA</h3>
+            <button class="side-btn" onclick="loadContent('1961-yil')">1961-yil: Ilk qadamlar</button>
+            <button class="side-btn" onclick="loadContent('rivojlanish')">Rivojlanish davri</button>
+            <button class="side-btn" onclick="loadContent('xalqaro')">Xalqaro maqom</button>
+            <button class="side-btn" onclick="loadContent('bugun')">Bugungi festival</button>
+            <button class="side-btn" onclick="loadContent('ananalalar')">An'analar va Qadriyatlar</button>
+        </aside>
+    </div>
+
+    <script>
+        const rainbowColors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
+
+        // Саҳифа мазмунини ўзгартириш функцияси
+        function loadContent(topic) {
+            const area = document.getElementById('content-area');
+            if(topic === '1961-yil') {
+                area.innerHTML = "<h1>1961-yil: Ilk qadamlar</h1><p>1961-йилда Наманган шаҳрида илк бор гулчилик байрами ташкил этилган. Ўша пайтда тадбир ҳозирги Заҳириддин Муҳаммад Бобур номидаги маданият ва истироҳат боғида ўтказилган...</p>";
+            } else if(topic === 'xalqaro') {
+                area.innerHTML = "<h1>Xalqaro maqom</h1><p>Сўнгги йилларда фестивалга хорижий давлатлардан ҳам гулчилар ташриф буюрмоқда. Жанубий Корея, Туркия, Голландия ва қўшни давлатлар вакиллари ўз композициялари билан иштирок этишмоқда...</p>";
+            }
+            // Бошқа саҳифалар учун шу тарзда давом эттириш мумкин
+        }
+
+        function createBurst(e) {
+            for (let i = 0; i < 20; i++) {
+                const p = document.createElement('div');
+                p.className = 'click-particle';
+                const color = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+                p.style.background = color;
+                p.style.width = Math.random() * 8 + 4 + 'px';
+                p.style.height = p.style.width;
+                p.style.left = e.clientX + 'px';
+                p.style.top = e.clientY + 'px';
+                const dx = (Math.random() - 0.5) * 250 + 'px';
+                const dy = (Math.random() - 0.5) * 250 + 'px';
+                p.style.setProperty('--dx', dx);
+                p.style.setProperty('--dy', dy);
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 800);
+            }
+        }
+    </script>
+</body>
+</html>

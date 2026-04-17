@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namangan Gullar Festivali | Video</title>
+    <style>
+        :root {
+            --neon-green: #39ff14;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            background: #0b0f19 url('image_74b4a6.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1;
+        }
+
+        header {
+            position: sticky; top: 0; width: 100%; padding: 15px 0; z-index: 100;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--neon-green);
+        }
+
+        nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        
+        .nav-main-btn {
+            background: transparent; color: #fff; border: 1px solid #ffd700;
+            padding: 8px 15px; border-radius: 5px; cursor: pointer;
+            text-transform: uppercase; font-size: 12px; transition: 0.3s;
+        }
+
+        .nav-main-btn:hover { background: #ffd700; color: #000; }
+
+        .main-container {
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 25px;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        /* Видео жойлашадиган асосий қисм */
+        .video-display-area {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Сиз сўраган видео бокс коди */
+        .video-box {
+            position: relative;
+            display: block;
+            margin-bottom: 20px;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 нисбат учун */
+        }
+
+        .video-box iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .video-info h2 { color: #ffd700; margin-top: 10px; }
+        .video-info p { color: #ccc; line-height: 1.6; }
+
+        /* Ўнг томон - Видеолар мундарижаси */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sidebar h3 { color: var(--neon-green); text-align: center; margin-bottom: 10px; letter-spacing: 2px; }
+
+        .video-btn {
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.4s;
+            text-align: left;
+            box-shadow: 0 0 5px var(--neon-green);
+            animation: pulse-green 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 5px var(--neon-green); }
+            50% { box-shadow: 0 0 15px var(--neon-green); }
+            100% { box-shadow: 0 0 5px var(--neon-green); }
+        }
+
+        .video-btn:hover {
+            background: var(--neon-green);
+            color: #000;
+            transform: scale(1.03);
+        }
+
+        .video-btn span { font-size: 20px; }
+
+        /* Босилгандаги нуқталар */
+        .click-particle {
+            position: fixed; pointer-events: none; border-radius: 50%;
+            z-index: 9999; animation: explode 0.8s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+        }
+
+        /* Мобил мослашув */
+        @media (max-width: 900px) {
+            .main-container { grid-template-columns: 1fr; }
+            .sidebar { order: -1; }
+        }
+    </style>
+</head>
+<body onclick="createBurst(event)">
+
+    <div class="overlay"></div>
+
+    <header>
+        <nav>
+            <button class="nav-main-btn" onclick="location.href='index.html'">Asosiy</button>
+            <button class="nav-main-btn" onclick="location.href='galery.html'">Galereya</button>
+            <button class="nav-main-btn" onclick="location.href='history.html'">Tarix</button>
+            <button class="nav-main-btn" style="background: var(--neon-green); color: #000; border-color: var(--neon-green);">Video</button>
+            <button class="nav-main-btn">Bog'lanish</button>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <article class="video-display-area">
+            <div class="video-box" id="player-container">
+                <iframe id="main-video" src="https://www.youtube.com/embed/5H_kM4qR0_E?rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <h2 id="video-title">Namangan Gullar Festivali - Rasmiy lavhalar</h2>
+                <p id="video-desc">Наманган шаҳрида бўлиб ўтаётган 65-халқаро гуллар фестивалидан энг сара лавҳалар ва байрам шукуҳи.</p>
+            </div>
+        </article>
+
+        <aside class="sidebar">
+            <h3>VIDEOLAR</h3>
+            <button class="video-btn" onclick="changeVideo('5aRrpHsCuz4?si=vg-2X3d0uL8Y1nZw', 'Festival Ochilishi', 'Gullar festivalining tantanali ochilish marosimi.')">
+                <span>▶</span> Ochilish Marosimi
+            </button>
+            <button class="video-btn" onclick="changeVideo('9Aqqehb9Tac?si=NyVgnr310koj3sQF', 'Gullar Karvoni', 'Shahar ko\'chalari bo\'ylab o\'tgan gullar bilan bezatilgan avtokarvon.')">
+           <span>▶</span> Gullar Karvoni
+            </button>
+            <button class="video-btn" onclick="changeVideo('9UWULfHHJhg?si=84uvMcS71-kD0F1x', 'Kechki Konsert', 'Festival doirasidagi gala-konsert va mushakbozlik.')">
+                <span>▶</span> Kechki Konsert
+            </button>
+            <button class="video-btn" onclick="changeVideo('9dsCxh1hj80?si=Rh9kRGOtVFgVo6TO', 'Intervyular', 'Xorijiy mehmonlar va gullar ustalari bilan suhbatlar.')">
+                <span>▶</span> Mehmonlar fikri
+            </button>
+        </aside>
+    </div>
+
+    <script>
+        const rainbowColors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
+
+        // Видеони алмаштириш функцияси
+        function changeVideo(id, title, desc) {
+            document.getElementById('main-video').src = `https://www.youtube.com/embed/${id}?rel=0&autoplay=1`;
+            document.getElementById('video-title').innerText = title;
+            document.getElementById('video-desc').innerText = desc;
+        }
+
+        // Рангли нуқталар эффекти
+        function createBurst(e) {
+            for (let i = 0; i < 20; i++) {
+                const p = document.createElement('div');
+                p.className = 'click-particle';
+                const color = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+                p.style.background = color;
+                p.style.width = Math.random() * 8 + 4 + 'px';
+                p.style.height = p.style.width;
+                p.style.left = e.clientX + 'px';
+                p.style.top = e.clientY + 'px';
+                const dx = (Math.random() - 0.5) * 250 + 'px';
+                const dy = (Math.random() - 0.5) * 250 + 'px';
+                p.style.setProperty('--dx', dx);
+                p.style.setProperty('--dy', dy);
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 800);
+            }
+        }
+    </script>
+</body>
+</html>
