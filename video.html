@@ -14,6 +14,7 @@
             margin: 0; padding: 0;
             width: 100%; min-height: 100vh;
             background: #0b0f19;
+            /* Расм линкини ўз лойиҳангизга мослаб олинг */
             background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('image_74b4a6.jpg');
             background-repeat: no-repeat;
             background-position: center center;
@@ -35,8 +36,8 @@
         
         .nav-main-btn {
             background: transparent; color: #fff; border: 1px solid var(--gold);
-            padding: 8px 12px; border-radius: 5px; cursor: pointer;
-            text-transform: uppercase; font-size: 11px; transition: 0.3s;
+            padding: 8px 15px; border-radius: 5px; cursor: pointer;
+            text-transform: uppercase; font-size: 12px; transition: 0.3s;
         }
 
         .nav-main-btn:hover { background: var(--gold); color: #000; }
@@ -60,7 +61,6 @@
             backdrop-filter: blur(8px);
         }
 
-        /* Видео контейнери 16:9 нисбатда */
         .video-box {
             position: relative;
             width: 100%;
@@ -112,7 +112,6 @@
             box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
         }
 
-        /* Эффектлар */
         .click-particle {
             position: fixed; pointer-events: none; border-radius: 50%;
             z-index: 9999; animation: explode 0.8s ease-out forwards;
@@ -122,7 +121,6 @@
             100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
         }
 
-        /* МОБИЛ МОСЛАШУВ */
         @media (max-width: 950px) {
             .main-container { grid-template-columns: 1fr; margin: 10px auto; }
             .sidebar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -163,25 +161,22 @@
         <aside class="sidebar">
             <h3>VIDEOLAR РЎЙХАТИ</h3>
             
-            <button class="video-btn" onclick="changeVideo('<iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Ftoxirjon.dedaxanov%2Fvideos%2F944498645230580%2F%3Fidorvanity%3D149359875846561&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe">
+            <button class="video-btn" onclick="changeVideo('FB', 'https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Ftoxirjon.dedaxanov%2Fvideos%2F944498645230580%2F', 'Gullar festivali ochilishi', 'Фестивалнинг очилиш маросимидан Фейсбук лавҳаси.')">
                 <span>▶</span> Gullar festivali ochilishi
             </button>
 
-            <button class="video-btn" onclick="changeVideo('FB', 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Ftoxirjon.dedaxanov%2Fvideos%2F1983699838942544%2F%3Fidorvanity%3D149359875846561&show_text=false&width=380&t=0', '65-Гуллар фестивали тайёргарлиги', 'Фейсбукдан олинган махсус лавҳа: Фестивалга қизғин тайёргарлик жараёни.')">
-                <span>🎬</span> 65-Гуллар фестивали (FB видео)
+            <button class="video-btn" onclick="changeVideo('FB', 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Ftoxirjon.dedaxanov%2Fvideos%2F1983699838942544%2F', '65-Гуллар фестивали тайёргарлиги', 'Фестивалга қизғин тайёргарлик жараёни (FB видео).')">
+                <span>🎬</span> 65-Гуллар фестивали тайёргарлик
             </button>
 
             <button class="video-btn" onclick="changeVideo('YT', '9Aqqehb9Tac', 'Gullar Karvoni', 'Shahar ko\'chalari bo\'ylab о\'тган мафтункор гуллар автокарвони.')">
-                <span>▶</span> Gullar Karvoni
+                <span>▶</span> Gullar Karvoni (YouTube)
             </button>
 
             <button class="video-btn" onclick="changeVideo('YT', '9UWULfHHJhg', 'Kechki Konsert', 'Festival доирасидаги гала-консерт ва мушакбозлик шоуси.')">
                 <span>▶</span> Kechki Konsert
             </button>
 
-            <button class="video-btn" onclick="changeVideo('YT', '9dsCxh1hj80', 'Mehmonlar fikri', 'Xorijiy меҳмонлар ва маҳаллий гулчилар билан интервьюлар.')">
-                <span>▶</span> Mehmonlar fikri
-            </button>
         </aside>
     </div>
 
@@ -193,21 +188,23 @@
             const videoWrapper = document.getElementById('video-wrapper');
             
             if (type === 'YT') {
-                // YouTube учун
+                // YouTube формати
                 player.src = `https://www.youtube.com/embed/${source}?autoplay=1&rel=0`;
-                videoWrapper.style.paddingTop = "56.25%"; // 16:9
+                videoWrapper.style.paddingTop = "56.25%"; 
             } else if (type === 'FB') {
-                // Facebook учун
+                // Facebook формати
                 player.src = source;
-                // Агар видео вертикал бўлса, баландликни бироз мослаш мумкин
-                videoWrapper.style.paddingTop = "75%"; 
+                videoWrapper.style.paddingTop = "56.25%"; 
             }
 
             document.getElementById('video-title').innerText = title;
             document.getElementById('video-desc').innerText = desc;
+            
+            // Тепага силлиқ қайтиш
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Рангли заррачалар эффекти
         function createBurst(e) {
             for (let i = 0; i < 15; i++) {
                 const p = document.createElement('div');
